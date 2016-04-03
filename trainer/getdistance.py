@@ -12,7 +12,8 @@ while (len(line) != 0):
 	for i in range(3):
 		ele = f.readline();
 		current += [ele]
-	vects += [current]
+	if abs(float(current[1])) <= 10:
+		vects += [current]
 	line = f.readline()
 
 #1216
