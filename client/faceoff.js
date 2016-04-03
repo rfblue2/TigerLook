@@ -50,7 +50,7 @@ if (Meteor.isClient) {
         rels.forEach(function(rel) {
             var new_face_id = rel.id1;
             if (new_face_id == face_id) new_face_id = rel.id2;
-            relationships.update({$or: [{id1: new_face_id},{id2: new_face_id}], $not: {$exists: Meteor.default_connection._lastSessionId}}, {$set: {Meteor.default_connection._lastSessionId: new_face_id}});
+            relationships.update({$or: [{id1: new_face_id},{id2: new_face_id}], $not: {$exists: Meteor.default_connection._lastSessionId}}, {$set: {SESSION_ID: new_face_id}});
         });
         Session.set('faces', rels.map(
             function(face){
