@@ -60,13 +60,11 @@ if (Meteor.isClient) {
             if (new_face_id == face_id) new_face_id = rel.id2;
             relationships.update({$or: [{id1: new_face_id},{id2: new_face_id}], $not: {$exists: Meteor.default_connection._lastSessionId}}, {$set: {SESSION_ID: new_face_id}});
         });
-        Session.set('faces', rels.map(
-            function(face){
-                var myid = face.id1;
-                if (myid == face_id) myid = face.id2;
-                return people.find({'_id': myid});
-            })
-        );                                                                                                      
+        return rels.map(function(face){
+            var myid = face.id1;
+            if (myid == face_id) myid = face.id2;
+            return people.find({'_id': myid});
+        });
     };
     reset = function() {
         relationships.update({$exists: Meteor.default_connection._lastSessionId}, {$unset: Meteor.default_connection._lastSessionId});

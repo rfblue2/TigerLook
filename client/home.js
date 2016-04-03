@@ -33,8 +33,8 @@ Template.face.events({
 		var clickedId = Blaze.getData(event.target)._id;
 		$( ".clickable_face" ).animate({'opacity' : 0}, function() {
 			// get next faces and set them to face_arr
-			face_arr = getNextFaces(clickedId);
-			Session.set("face_arr", faces_arr);
+			var newFaces = getNextFaces(clickedId);
+			Session.set("face_arr", newFaces);
 
 			$( ".clickable_face" ).animate({'opacity' : 1});
 		});
