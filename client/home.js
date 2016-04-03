@@ -5,7 +5,7 @@ faces_arr =  [{_id:"http://www.princeton.edu/deptafe_internal/cimg!0/dxl1kmtla6g
                 {_id:"http://www.princeton.edu/deptafe_internal/cimg!0/lsgnytv9w92nzlmq67rhu7y1wv92bj", name:"Evan"}, 
                 {_id:"http://www.princeton.edu/deptafe_internal/cimg!0/ogcys7dc8co5b9ztrhjv4h663yvgsgn", name:"Gordon"}];
 
-Template.home.created = function() {
+Template.home.onCreated = function() {
 	console.log(faces_arr[0].name);
 	face_arr = getInitialFaces();
 	console.log(faces_arr[0].name);
