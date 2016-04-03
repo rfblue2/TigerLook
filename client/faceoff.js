@@ -20,7 +20,7 @@ if (Meteor.isClient) {
     Session.set('range', RANGE_DEFAULT);
     
     getInitialFaces = function() {
-        var arr = people.find().sort({_id: 1}).limit(5).fetch();
+        var arr = people.find({}, {sort: {_id: 1}, limit: 5}).fetch();
         arr.forEach(function(face) {
                 relationships.update(
                     {$or: [{id1: face._id},{id2: face._id}], $not: {$exists: SESSION_ID}}, {$set: {SESSION_ID: face._id}}
