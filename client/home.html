@@ -1,14 +1,18 @@
 <template name="home">
+    <div class="row">
+    	<div class="panel panel-default">
+	        <ul class="panel-body cards-list">
+	            {{#each faces}}
+	                {{> face}}
+	            {{/each}}
+	        </ul>
+    	</div>
+    </div>
 	<div class="row">
 		<div class="col-xs-12">
-			<p>You just said "hi" to your friend that you always meet at lunch, but don't remember his name.  It's been several months now and you never bothered asking so it's kind of late now.  But you don't want to embarass yourself when you reveal that you've forgotten his name.  Well don't fear!  With TigerLook, you can find out!  Click the image most similar to who you are searching for and we'll continue to provide you with possible matches until you've got your person!</p>
+			<div class="well well-lg">
+				<p>Find a Princeton Tiger by telling us who looks the most like them.  Simply click on a face!</p>
+			</div>
 		</div>
 	</div>
-    <div class="row">
-        <ul class="cards-list">
-            {{#each faces}}
-                {{> face}}
-            {{/each}}
-        </ul>
-    </div>
 </template>
