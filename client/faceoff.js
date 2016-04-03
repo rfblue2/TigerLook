@@ -19,7 +19,7 @@ if (Meteor.isClient) {
     
     Session.set('range', RANGE_DEFAULT);
     
-    Session.set('getInitialFaces', function() {
+    getInitialFaces = function() {
         var arr = people.find().sort({_id: 1}).limit(5).fetch();
         arr.forEach(function(face) {
                 relationships.update(
@@ -27,8 +27,8 @@ if (Meteor.isClient) {
                 );
         });
         return arr;
-    });
-    Session.set('getNextFaces', function(face_id) {
+    };
+    getNextFaces = function(face_id) {
         
         // pick edges that meet all of the following criteria:
         // - touches the face we're starting with
@@ -59,8 +59,8 @@ if (Meteor.isClient) {
                 return people.find({'_id': myid});
             })
         );                                                                                                      
-    });
-    Session.set('reset', function() {
+    };
+    reset = function() {
         relationships.update({$exists: Meteor.default_connection._lastSessionId}, {$unset: Meteor.default_connection._lastSessionId});
-    })
+    };
 }
