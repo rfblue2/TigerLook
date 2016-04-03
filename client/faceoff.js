@@ -50,7 +50,7 @@ if (Meteor.isClient) {
         
         if (range > DISPLAY_NUM) Session.set('range', range - RANGE_DEC);
         
-        var rels = cursor.sort({'distance': 1}).limit( range ).fetch();
+        var rels = cursor.fetch();
         shuffle(rels);
         rels = rels.slice(0, DISPLAY_NUM);
         
