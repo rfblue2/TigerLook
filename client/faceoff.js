@@ -39,7 +39,7 @@ if (Meteor.isClient) {
                 {id2: face_id}
             ]}, 
             {$or: [
-                { $not: { $exists: Meteor.default_connection._lastSessionId } }, 
+                { SESSION_ID: {$exists: false} }, 
                 { SESSION_ID: face_id }
             ]}
         ]});
