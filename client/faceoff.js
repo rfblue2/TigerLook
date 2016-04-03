@@ -33,7 +33,8 @@ if (Meteor.isClient) {
         // pick edges that meet all of the following criteria:
         // - touches the face we're starting with
         // - either is unmarked OR was marked by the face we're starting with
-        var cursor = relationships.find({$or: [{id1: face_id},{id2: face_id}], $or: [{$not: {$exists: Meteor.default_connection._lastSessionId}}, {Meteor.default_connection._lastSessionId: face_id}]});
+        var cursor = relationships.find({$or: [{id1: face_id},{id2: face_id}], 
+                                         $or: [{$not: {$exists: Meteor.default_connection._lastSessionId}}, {SESSION_ID: face_id}]});
         
         
         var range = (Session.get('range'))();
