@@ -6,10 +6,23 @@ face_arr = [{_id:"http://www.princeton.edu/deptafe_internal/cimg!0/dxl1kmtla6gcr
 
 Session.set("face_arr", face_arr);
 
+Template.home.created() = function() {
+	// initial faces
+	console.log("created");
+};
+
 Template.home.helpers({
     faces: function () { 
 				return Session.get("face_arr");
 			}
+});
+
+Template.home.events({
+	'click button'(event, instance) {
+		console.log("clicked button");
+		// reset
+		// get initial set of faces
+	}
 });
 
 Template.face.events({
@@ -19,8 +32,10 @@ Template.face.events({
 		for (var i = 0; i < face_arr.length; i++) {
 			if (testId == face_arr[i]._id) {
 				$( ".clickable_face" ).animate({'opacity' : 0}, function() {
+					// get next faces and set them to face_arr
 					face_arr[i] = {_id:"http://www.princeton.edu/deptafe_internal/cimg!0/ogcys7dc8co5b9ztrhjv4h663yvgsgn", name:"Gordon"};
 					Session.set("face_arr", face_arr);
+
 					$( ".clickable_face" ).animate({'opacity' : 1});
 				});
 				
