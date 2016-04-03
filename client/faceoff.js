@@ -5,6 +5,7 @@ if (Meteor.isClient) {
     const DISPLAY_NUM = 5;
     const RANGE_DEC = 5;
     const RANGE_DEFAULT = 20;
+    const SESSION_ID = Meteor.default_connection._lastSessionId;
     
     function shuffle(a) {
         var j, x, i;
@@ -21,7 +22,9 @@ if (Meteor.isClient) {
     Session.set('getInitialFaces', function() {
         var arr = people.find().sort({_id: 1}).limit(5).fetch();
         arr.forEach(function(face) {
-            relationships.update({$or: [{id1: face._id},{id2: face._id}], $not: {$exists: Meteor.default_connection._lastSessionId}}, {$set: {Meteor.default_connection._lastSessionId: face._id}});
+                relationships.update(
+                    {$or: [{id1: face._id},{id2: face._id}], $not: {$exists: SESSION_ID}}, {$set: {SESSION_ID: face._id}}
+                );
         });
         return arr;
     });
@@ -54,7 +57,7 @@ if (Meteor.isClient) {
                 if (myid == face_id) myid = face.id2;
                 return people.find({'_id': myid});
             })
-        );
+        );                                                                                                      
     });
     Session.set('reset', function() {
         relationships.update({$exists: Meteor.default_connection._lastSessionId}, {$unset: Meteor.default_connection._lastSessionId});
