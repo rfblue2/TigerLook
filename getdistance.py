@@ -9,22 +9,23 @@ vects = [];
 while (len(line) != 0):
 	current = [];
 	current += [line];
-	for i in range(5):
+	for i in range(3):
 		ele = f.readline();
 		current += [ele]
 	vects += [current]
+	line = f.readline()
 
-
+#1216
 g.write("{\"relationships\": [\n")
 for i in range(len(vects)):
 	for j in range(i+1, len(vects)):
 		summ = 0.0;
-		for k in range(1,6):
-			sum += (vects[i][k] - vects[j][k]) * (vects[i][k] - vects[j][k]);
+		for k in range(1,4):
+			summ += (float(vects[i][k]) - float(vects[j][k])) * (float(vects[i][k]) - float(vects[j][k]));
 		summ = math.sqrt(summ);
 		g.write("{\"distance\": \"" + str(summ) + "\", ")
-		g.write("\"id1\": \"" + vects[i] + "\", ")
-		g.write("\"id2\": \"" + vects[i] + "\"}, ")
+		g.write("\"id1\": \"" + vects[i][0] + "\", ")
+		g.write("\"id2\": \"" + vects[j][0] + "\"}, ")
 
 
 g.write("]}")
