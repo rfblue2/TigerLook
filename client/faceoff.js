@@ -33,6 +33,9 @@ if (Meteor.isClient) {
         // pick edges that meet all of the following criteria:
         // - touches the face we're starting with
         // - either is unmarked OR was marked by the face we're starting with
+        
+        var range = Session.get('range');
+        
         var cursor = relationships.find({$and: [
             {$or: [
                 {id1: face_id},
@@ -42,10 +45,8 @@ if (Meteor.isClient) {
                 { SESSION_ID: {$exists: false} }, 
                 { SESSION_ID: face_id }
             ]}
-        ]});
-        
-        
-        var range = Session.get('range');
+        ]}, {sort: {'distance': 1}, limit: range});
+                
         
         if (range > DISPLAY_NUM) Session.set('range', range - RANGE_DEC);
         
