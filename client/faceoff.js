@@ -45,7 +45,7 @@ if (Meteor.isClient) {
         ]});
         
         
-        var range = (Session.get('range'))();
+        var range = Session.get('range');
         
         if (range > DISPLAY_NUM) Session.set('range', range - RANGE_DEC);
         
