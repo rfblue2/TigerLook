@@ -8,7 +8,7 @@ def is_number(s):
     except ValueError:
         return False
 
-g = open("relationships.txt", 'w')
+
 f = open("output.txt", 'r')
 
 line = f.readline()
@@ -40,7 +40,10 @@ while (len(line) > 0):
 
 #1216
 print("starting")
-g.write("{\"relationships\": [\n")
+new_counter = 1
+nums = 0
+g = open("relationships"+str(new_counter)+".txt", 'w')
+g.write("[\n")
 for i in range(len(vects)):
     print(str(i))
     for j in range(i+1, len(vects)):
@@ -48,10 +51,20 @@ for i in range(len(vects)):
         for k in range(1,4):
             summ += (float(vects[i][k]) - float(vects[j][k])) * (float(vects[i][k]) - float(vects[j][k]));
         summ = math.sqrt(summ);
-        g.write("{\"distance\": \"" + str(summ) + "\", ")
-        g.write("\"id1\": \"" + vects[i][0] + "\", ")
-        g.write("\"id2\": \"" + vects[j][0] + "\"}, ")
+        if nums == 999999 or (j == len(vects) - 1 and i == len(vects) - 2):
+            g.write("{\"distance\": \"" + str(summ) + "\",\"id1\":\"" + vects[i][0][:-1] + "\",\"id2\":\"" + vects[j][0][:-1] + "\"}")
+        else:
+            g.write("{\"distance\": \"" + str(summ) + "\",\"id1\":\"" + vects[i][0][:-1] + "\",\"id2\":\"" + vects[j][0][:-1] + "\"},")
+        nums += 1
+
+        if (nums >= 1000000):
+            g.write("]")
+            g.close()
+            nums = 0
+            new_counter += 1
+            g = open("relationships"+str(new_counter)+".txt", 'w')
+            g.write("[\n")
 
 
-g.write("]}")
+g.write("]")
 g.close()
