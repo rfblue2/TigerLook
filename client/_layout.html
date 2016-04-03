@@ -1,7 +1,13 @@
 <head>
+    <meta charset="UTF-8">
+    <title>TigerFinder | Find Your Tiger</title>
+    <meta name="author" content="Casey Chow, Matthew Li, Evan Wildenhain, Roland Fong">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="TigerFinder | Find Your Tiger">
+    <meta property="og:description" content="Sometimes you meet someone and forget their name. Find them anyway.">
+    
     <!-- BOOTSTRAP -->
-    <!-- Latest compiled and minified CSS -->
-    <!--<link rel="stylesheet" href="bootstrap.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
     <!-- Optional theme -->
@@ -9,31 +15,13 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <title>TigerLook</title>
 </head>
 
-<body>
+<template name="layout">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <h1>Tigerlook</h1>
-            </div>
-        </div>
-        <div class="row">
-            <ul>
-                {{#each faces}}
-                    {{> face}}
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</body>
-
-<template name="face">
-    <div class="card col-xs-2">
-        <img class="card-img-top" src={{src}}>
-        <div class="card-block">
-            <h4 class="card-title">{{name}}</h4>
-        </div>
+        {{> navigation}}
+        <main class="row layout-{{currentTemplate}}">
+            {{> yield}}
+        </main>
     </div>
 </template>
